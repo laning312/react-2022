@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class EmpList extends React.Component {
+            state = {
+                emps: [
+                    { ename: 'aaa', age: 20 },
+                    { ename: 'bbb', age: 23 }
+                ]
+            }
+
+            render() {
+                const {emps} = this.state
+                return (
+                    <div>
+                        <h3>员工列表如下</h3>
+                        <ul>
+                            {
+                                emps.map(e =>
+                                    <li>姓名:{e.ename}, 年龄:{e.age}</li>
+                                )
+                            }
+                        </ul>
+                    </div>
+                )
+            }
+        }
+
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        root.render(<EmpList />)
+    </script>
+</body>
+
+</html>

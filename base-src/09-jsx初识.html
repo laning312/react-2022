@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <!-- 解析JSX语法代码转为JS代码的库。 -->
+    <script src="./lib/babel.min.js"></script>
+    <!-- type属性需指定为text/babel才能正确识别jsx语法 -->
+    <script type="text/babel">
+        // 用jsx语法创建React元素
+        /* 
+        1. 当使用`DOM类型的标签`时，标签的`首字母必须小写`
+        2. jsx中可以写js的表达式，但需要用{}包起来
+        3. 样式的类名指定不要用class，要用className。
+        4. 内联样式，要用style={{key:value}}的形式去写。
+        5. 只有一个根标签（写多直接IDE报错）
+        6. 标签必须闭合(不闭合直接IDE报错)
+        */
+
+        let msg = 'hello, world!!!'
+
+        let data = {
+            msg: 'sucess'
+        }
+
+        let div =
+            (
+                <div className="box" style={{color: 'red', fontSize: '40px'}}>
+                    <h3>{data.msg}</h3>
+                    <a href="http://www.baidu.com">BAI DU</a>
+                    <hr />
+                </div>
+            )
+
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        root.render(div)
+    </script>
+</body>
+
+</html>

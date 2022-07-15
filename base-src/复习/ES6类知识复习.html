@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        class Employee {
+            // 构造函数，用于初始化对象的属性
+            constructor(ename, ejob) {
+                this.ename = ename
+                this.ejob = ejob
+            }
+
+            // 定义类中的方法 - 自动放到prototype上
+            work() {
+                console.log(`${this.ename} is working.....`)
+            }
+        }
+
+        let e1 = new Employee('张三', '研发工程师')
+
+        // 继承
+        class BaiduEmployee extends Employee {
+            constructor(ename, ejob, salary) {
+                super(ename, ejob)
+                this.salary = salary
+            }
+
+            writeCode() {
+                console.log(`${this.ename} is write code .....`)
+            }
+        }
+
+        let e2 = new BaiduEmployee('李四', '前端开发工程师')
+    </script>
+</body>
+</html>

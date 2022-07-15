@@ -1,0 +1,25 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.coma {
+    width: 400px;
+    padding: 10px;
+    background: #ddd;
+}
+
+.comb {
+    padding: 10px;
+    background: pink;
+}
+
+.comc {
+    padding: 10px;
+    background: lightblue;
+}
+
+.comd {
+    padding: 10px;
+    background: orange;
+}

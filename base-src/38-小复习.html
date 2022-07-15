@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+        // ref是为了用React的方式找到dom元素，进而对元素进行操作
+        // ref可以用在任何元素身上，根据自己的需要决定是否使用
+
+        class EmployeeList extends React.Component {
+
+            state = {
+                emplist: [
+                    { ename: '刘备', ejob: '老板' },
+                    { ename: '关羽', ejob: '二老板' },
+                    { ename: '诸葛亮', ejob: '军师' }
+                ]
+            }
+
+            // 创建ref
+            oEname = React.createRef()   // {current: null}
+            oEjob = React.createRef()
+
+            // 事件处理函数
+            addEmpHandler = () => {
+                const ename = this.oEname.current.value
+                const ejob = this.oEjob.current.value
+                // console.log(ename, ejob)
+                // 把用户输入的数据添加到state中的emplist上（因为页面中的员工信息是根据emplist展示的）
+                // this.state.emplist.push({ename, ejob})
+                // console.log(this.state.emplist)
+                // let { emplist } = this.state
+                // emplist.push({ename, ejob})
+                // this.setState({
+                //     emplist
+                // })
+
+                this.setState({
+                    emplist: [...this.state.emplist, {ename, ejob}]
+                })
+
+            }
+
+            render() {
+                const { emplist } = this.state
+                const { title } = this.props
+                return (
+                    <div>
+                        <h3>{title}</h3>
+                        <form action="">
+                            员工姓名： <input type="text" ref={this.oEname} /> <br />
+                            员工职位：<input type="text " ref={this.oEjob} /> <br />
+                            <input type="button" onClick={this.addEmpHandler} value="添加" />
+                        </form>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>员工姓名</th>
+                                    <th>员工职位</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    emplist.map(e =>
+                                        <tr>
+                                            <td>{e.ename}</td>
+                                            <td>{e.ejob}</td>
+                                        </tr>
+                                    )
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            }
+        }
+
+        // 创建React根容器
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        // 渲染元素
+        root.render(<EmployeeList title="三国人物篇" />)
+
+    </script>
+</body>
+
+</html>

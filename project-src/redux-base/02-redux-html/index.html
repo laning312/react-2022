@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div class="box">
+        <input type="button" id="subBtn" value="减少">
+        <span id="num"></span>
+        <input type="button" id="addBtn" value="增加">
+    </div>
+
+    <script src="https://unpkg.com/redux@4.2.0/dist/redux.js"></script>
+    <script>
+         let oNum = document.getElementById('num')
+        /*
+        因为创建容器对象时必须有参数reducer， 所以先创建reducer
+        创建容器对象
+        */
+        function numReducer(state={num: 1}, action) {
+            console.log(state)
+            console.log(action)
+            switch (action.type) {
+                case 'ADD':
+                    console.log('add')
+                    return {num: state.num + 1}
+                case 'SUB':
+                    return {num: state.num - 1}
+                default: 
+                    return state
+            }
+        }
+
+        // 创建容器对象
+        const store = Redux.createStore(numReducer)
+        // 将数据填入dom中
+        oNum.innerHTML = store.getState().num  // 读取容器中的数据
+        // console.log(store.getState())
+
+        // store的订阅方法（它的回调函数在每次dispatch后就会被调用）
+        store.subscribe(() => {
+            oNum.innerHTML = store.getState().num
+        })
+
+        // 加操作的事件处理函数
+        document.getElementById("addBtn").onclick = function() {
+            // 通过store的dispatch分发不同的操作（对state的更新操作）
+            store.dispatch({type: 'ADD'}) // 自动调用numReducer
+            // oNum.innerHTML = store.getState().num
+        }
+
+
+        document.getElementById("subBtn").onclick = function() {
+            store.dispatch({type: 'SUB'})  // 自动调用numReducer
+            // oNum.innerHTML = store.getState().num
+        }
+    </script>
+</body>
+
+</html>

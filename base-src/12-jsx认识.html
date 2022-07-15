@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+        /* 
+     1. 当使用`DOM类型的标签`时，标签的`首字母必须小写`
+     2. jsx中可以写js的表达式，但需要用{}包起来
+     3. 样式的类名指定不要用class，要用className。
+     4. 内联样式，要用style={{key:value}}的形式去写。
+     5. 只有一个根标签（写多直接IDE报错）
+     6. 标签必须闭合(不闭合直接IDE报错)
+
+
+     表达式： （能产生一个值的结构）
+        部分情况：
+         1) 函数调用时，表达式就是函数的返回值，但是undefined, null, 布尔型会被忽略
+     非表达式：
+        if/else
+        for
+        switch
+     */
+
+        // function fn() {}  // 默认返回undefined
+        function fn2() {
+            // return 'hello'
+            // return null
+            return 9
+        }  
+
+        // 写在jsx外面是可以
+        if(true) {
+            console.log(111)
+        }
+
+        let div = (
+            <div>
+                <h3>3 + 4</h3>
+                <h3>{3 + 4}</h3>
+                <h3>{fn2()}</h3>
+            </div>
+        )
+
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        root.render(div)
+    </script>
+</body>
+
+</html>

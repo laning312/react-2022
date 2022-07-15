@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 准备一个作为根的元素 -->
+    <div id="root"></div>
+    
+    <!-- 引入react核心库 -->
+    <script src="./lib/react.development.js"></script>
+    <!-- 引入react-dom库 -->
+    <script src="./lib/react-dom.development.js"></script>
+
+    <script>
+        // 一个普通dom元素
+        // let o = document.createElement('h2')
+        // console.log(o)
+        // 1. 第一个API  React.createElement()  - 用于创建一个React元素
+        let h2 = React.createElement('h2', {title: 'hello'}, 'hello world!')
+        // console.log(h2)
+        // 2. 第二个API ReactDOM.createRoot()  -  创建React根容器，需要一个原生DOM元素作为参数
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+        // 3. 第三个API  root.render()  - 调用React根容器的render方法，将需要展示的React元素作为参数
+        root.render(h2)
+    </script>
+</body>
+</html>

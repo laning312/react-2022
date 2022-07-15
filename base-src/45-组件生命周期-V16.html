@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script src="./lib/16.8.4/react.development.js"></script>
+    <script src="./lib/16.8.4/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+<!--     
+/**
+* 
+* 初次渲染流程：
+*      constructor
+*      componentWillMount
+*      render
+*      componentDidMount
+*     -  componentWillUnmount
+* 更新流程：
+*      shouldComponentUpdate
+*      componentWillUpdate
+*      render
+*      componentDidUpdate
+*    - componentWillUnmount
+* 强制更新流程
+*      componentWillUpdate
+*      render
+*      componentDidUpdate
+*     -  componentWillUnmount
+* 
+* 
+* 
+* 
+* 
+* 
+* * / -->
+
+    <script type="text/babel">
+
+
+
+        class Demo extends React.Component {
+
+            constructor() {
+                super()
+                this.state = {
+                    msg: 'hello'
+                }
+                console.log('Demo constructor...')
+            }
+
+            componentWillMount() {
+                console.log('Demo componentWillMount...')
+            }
+
+            componentDidMount() {
+                console.log('Demo componentDidMount...')
+            }
+
+            componentWillUnmount() {
+                console.log('Demo componentWillUnmount...')
+            }
+
+            shouldComponentUpdate() {
+                console.log('Demo shouldComponentUpdate...')
+                // return true
+                return false
+            }
+
+            componentWillUpdate() {
+                console.log('Demo componentWillUpdate...')
+            }
+
+            componentDidUpdate() {
+                console.log('Demo componentDidUpdate...')
+            }
+
+            unmountComp = () => {
+                ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+            }
+
+            changeData = () => {
+                this.setState({
+                    msg: '你好'
+                })
+            }
+
+            forceHandle = () => {
+                this.forceUpdate()
+            }
+
+            render() {
+                console.log('Demo render....')
+                return (
+                    <div>
+                        {this.state.msg}
+                        <button onClick={this.changeData}>修改数据</button>
+                        <button onClick={this.forceHandle}>强制更新</button>
+                        <button onClick={this.unmountComp}>卸载组件</button>
+                    </div>
+                )
+            }
+        }
+
+        
+        ReactDOM.render(<Demo />, document.getElementById('root'))
+    </script>
+
+</body>
+
+</html>

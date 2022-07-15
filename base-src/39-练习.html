@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/mylog.css">
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class MyLog extends React.Component {
+
+            state = {
+                logs: [
+                    { month: '六月', day: 20, thing: '学习JavaScript', duration: '2小时' },
+                    { month: '六月', day: 22, thing: '学习Nodejs', duration: '1小时' },
+                    { month: '六月', day: 23, thing: '学习React', duration: '2小时' }
+                ]
+            }
+
+            // 为输入框创建ref
+            oMonth = React.createRef()
+            oDay = React.createRef()
+            oThing = React.createRef()
+            oDuration = React.createRef()
+
+            // 添加数据的事件处理函数
+            addLogHandler = event => {
+                // 阻止提交行为
+                event.preventDefault()
+
+                const month = this.oMonth.current.value
+                const day = this.oDay.current.value
+                const thing = this.oThing.current.value
+                const duration = this.oDuration.current.value
+                // 包装成一个新对象
+                const log = { month, day, thing, duration }
+                // 修改state中的数据
+                let { logs } = this.state
+                logs.push(log)
+                this.setState({
+                    logs
+                })
+            }
+
+            // 删除数据的事件处理函数
+            deleteLogHandler = e => {
+                let index = +e.target.dataset.index
+                let {logs} = this.state
+                logs.splice(index, 1)
+                this.setState({
+                    logs
+                })
+            }
+
+            render() {
+                return (
+                    <div className="app">
+                        <div className="card">
+                            <form className="logs-form" onSubmit={this.addLogHandler}>
+                                <div className="form-item">
+                                    <label htmlFor="month">月份</label>
+                                    <input id="month" type="text" ref={this.oMonth} />
+                                </div>
+                                <div className="form-item">
+                                    <label htmlFor="day">日期</label>
+                                    <input id="day" type="number" ref={this.oDay} />
+                                </div>
+                                <div className="form-item">
+                                    <label htmlFor="desc">内容</label>
+                                    <input id="desc" type="text" ref={this.oThing} />
+                                </div>
+                                <div className="form-item">
+                                    <label htmlFor="time">时长</label>
+                                    <input id="time" type="text" ref={this.oDuration} />
+                                </div>
+                                <div className="form-btn">
+                                    <button>添加</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div className="logs">
+                            {this.state.logs.map((o, index) =>
+                                <div className="item">
+                                    <div className="date">
+                                        <div className="month">
+                                            {o.month}
+                                        </div>
+                                        <div className="day">
+                                            {o.day}
+                                        </div>
+                                    </div>
+
+                                    <div className="content">
+                                        <h2 className="desc">{o.thing}</h2>
+                                        <div className="time">{o.duration}</div>
+                                    </div>
+                                    <div className="delete" data-index={index} onClick={this.deleteLogHandler}>×</div>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        // 创建React根容器
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        // 渲染元素
+        root.render(<MyLog />)
+
+    </script>
+</body>
+
+</html>

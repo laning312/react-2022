@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class Login extends React.Component {
+
+            // oUsername = React.createRef()返回一个对象{current:dom元素} current所指向的dom元素是jsx中标签属性为oUsername的元素
+            oUsername = React.createRef()
+            oPassword = React.createRef()
+
+            doLogin = () => {
+                // 得到用户输入
+                console.log(this.oUsername.current.value)
+            }
+
+            render() {
+                console.log(this)
+                return (
+                    <form>
+                        username: <input type="text" ref={this.oUsername}/> <br />
+                        pasword: <input type="password" /> <br />
+                        <input type="button" value="Login" onClick={this.doLogin}/>
+                    </form>
+                )
+            }
+        }
+
+        // 创建React根容器
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        // 渲染元素
+        root.render(<Login />)
+
+    </script>
+
+</body>
+
+</html>

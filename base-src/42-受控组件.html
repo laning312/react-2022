@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class MyComponent extends React.Component {
+            
+            state = {
+                value: ''
+            }
+
+            getDataHandler = () => {
+                // console.log(this)
+                console.log(this.state.value)
+                // 清空输入框数据
+                this.setState({
+                    value: ''
+                })
+            }
+
+            saveValue = e => {
+                // console.log(e.target)
+                this.setState({
+                    value: e.target.value
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <input type="text" onChange={this.saveValue} value={this.state.value} />  
+                        <h3>{this.state.value}</h3>
+                        <br />
+                        <input type="button" value="显示输入框数据" onClick={this.getDataHandler} />
+                    </div>
+                )
+            }
+        }
+        // 创建React根容器
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        // 渲染元素
+        root.render(<MyComponent />)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+
+        // 定义一个类式组件(定义好怎么用? - 通过标签的方式使用 - 首字母大写)
+        class Welcome extends React.Component{
+
+            // 构造函数执行1次
+            constructor() {   
+                console.log('constructor....')
+                super()
+                // 初始化state属性
+                this.state = {
+                    username: '刘备',
+                    age: 30
+                }
+            }
+
+            // 定义事件处理方法
+            changeUsername=() => {
+                console.log('changeUsername.....')
+                // 使用this.setState方法重置state中的属性时，reat会再次调用render方法
+                this.setState({
+                    username: '曹操',
+                    // age: 40
+                })
+                // this.state.username = '关羽' 此种方式修改不会再次调用render方法，所以界面没有变化
+            }
+
+            // 渲染方法   初始1次 + n（取决于修改state中的属性次数）
+            render() {
+                console.log('render.....')
+                //  读取state中的数据 
+                return (
+                    <h2 onClick={this.changeUsername}>你好，{this.state.username}, 年龄：{this.state.age}！</h2>
+                )
+            }
+        }
+
+
+        // 创建React根容器
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        // 渲染元素
+        root.render(<Welcome />)
+
+
+    </script>
+
+</body>
+
+</html>

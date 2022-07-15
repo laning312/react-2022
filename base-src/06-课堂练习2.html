@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- <div id="root">
+        <div class="container">
+            <h3 title="标题">三国演义</h3>
+            <span title="作者">罗贯中</span>
+            <img src="xxxxx" />
+        </div>
+    </div> -->
+
+
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script>
+        /*
+        用React方式动态生成以上id为root中的相关节点。
+        */
+       let h3 = React.createElement('h3', {title: '标题'}, '三国演义')
+       let span = React.createElement('span', {title: '作者'}, '罗贯中')
+       let img = React.createElement('img', {src: './images/8c634a2233a9c9bde292633c20e0fa4a.jpeg'})
+
+       let div = React.createElement('div', {className: 'container'}, h3, span, img)
+
+       let root = ReactDOM.createRoot(document.getElementById('root'))
+
+       root.render(div)
+    </script>
+</body>
+
+</html>

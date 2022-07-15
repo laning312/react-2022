@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="box">
+        <input type="button" id="subBtn" value="减少"> 
+        <span id="num"></span>
+        <input type="button" id="addBtn" value="增加"> 
+    </div>
+
+
+    <script>
+        let n = 1
+        let oNum = document.getElementById('num')
+        oNum.innerHTML = n
+
+        document.getElementById("subBtn").onclick = function() {
+            n--
+            oNum.innerHTML = n
+        }
+
+        document.getElementById("addBtn").onclick = function() {
+            n++
+            oNum.innerHTML = n
+        }
+    </script>
+</body>
+</html>

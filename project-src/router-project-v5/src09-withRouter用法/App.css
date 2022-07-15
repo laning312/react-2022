@@ -1,0 +1,34 @@
+.app {
+    width: 560px;
+    margin: 10px auto;
+}
+.tabs {
+    display: flex;
+    flex-direction: rows;
+}
+
+.tabs a {
+    flex: 1;
+    padding: 10px 0px;
+    background: #999;
+    color: #fff;
+    margin-right: 1px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.tabs a.active {
+    background: #333;
+}
+
+.header {
+    background: lightblue;
+    height: 40px;
+    line-height: 40px;
+}
+
+.header .back {
+    font-size: 20px;
+    padding: 5px 10px;
+    background: yellowgreen;
+}

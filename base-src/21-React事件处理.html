@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+
+        // 定义一个类式组件(定义好怎么用? - 通过标签的方式使用 - 首字母大写)
+        class Welcome extends React.Component{
+
+            constructor() {
+                super()
+                // 初始化state属性
+                this.state = {
+                    username: '刘备'
+                }
+            }
+
+            // 定义事件处理方法
+            changeUsername() {
+                console.log(this)   // undefined
+                // this.state.username = '曹操'  error
+            }
+
+            // 渲染方法
+            render() {
+                console.log(this)  // Welcome对象
+                //  读取state中的数据 
+                return (
+                    <h2 onClick={this.changeUsername}>你好，{this.state.username}！</h2>
+                )
+            }
+        }
+
+
+        // 创建React根容器
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        // 渲染元素
+        // root.render(<h3>hello</h3>)
+        root.render(<Welcome />)
+
+
+    </script>
+
+</body>
+
+</html>

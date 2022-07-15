@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+        /* 
+     1. 当使用`DOM类型的标签`时，标签的`首字母必须小写`
+     2. jsx中可以写js的表达式，但需要用{}包起来
+     3. 样式的类名指定不要用class，要用className。
+     4. 内联样式，要用style={{key:value}}的形式去写。
+     5. 只有一个根标签（写多直接IDE报错）
+     6. 标签必须闭合(不闭合直接IDE报错)
+
+
+     表达式： （能产生一个值的结构）
+        部分情况：
+         1) 函数调用时，表达式就是函数的返回值，但是undefined, null, 布尔型会被忽略
+     非表达式：
+        if/else
+        for
+        switch
+     */
+
+        let arr = ['李白', '杜甫', '白居易']
+
+        /* 
+        jsx会自动遍历数组，但格式无法控制
+        let o = (
+            <ul>
+                {arr}
+            </ul>
+        ) 
+        
+        希望展示成
+         <ul>
+            <li>李白</li>
+            <li>杜甫</li>
+            <li>白居易</li>
+         </ul>
+
+         怎么把
+            ['李白', '杜甫', '白居易'] 
+         变成
+            [<li>李白</li>,<li>杜甫</li>,<li>白居易</li>]
+
+             newArr.push(<li>{arr[i]}</li>)  - <li>{arr[i]}</li>是jsx语法创建的React元素
+        */
+        let newArr = []
+        for (let i = 0; i < arr.length; i++) {
+            newArr.push(<li>{arr[i]}</li>)
+        }
+
+        // jsx语法创建React元素
+        let o = (
+            <ul>
+                {newArr}
+            </ul>
+        )
+
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        root.render(o)
+    </script>
+</body>
+
+</html>

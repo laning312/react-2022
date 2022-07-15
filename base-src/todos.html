@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .todos {
+            width: 80%;
+            margin: 30px auto;
+            list-style: none;
+            padding: 0 20px;
+            border-top: 1px solid #ccc;
+            background: #fff;
+            box-shadow: 0 10px 30px #ccc;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: rgba(51, 158, 131, 0.6);
+        }
+
+        .todos input::-webkit-input-placeholder {
+            font-style: italic;
+            font-weight: 100;
+            color: #999;
+        }
+
+        .todos>li {
+            display: flex;
+            flex-direction: rows;
+            align-items: center;
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 26px;
+            padding: 12px 0;
+            border-bottom: 1px solid #ededed;
+            position: relative;
+        }
+
+
+        .todos>li:first-child>input {
+            font-size: 24px;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            background: transparent;
+        }
+
+
+        .todos li time {
+            position: absolute;
+            right: 60px;
+            top: 15px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .todos li label {
+            display: block;
+            padding-left: 10px;
+            vertical-align: middle;
+            letter-spacing: 2px;
+        }
+
+        .todos li button {
+            position: absolute;
+            right: 5px;
+            top: 10px;
+            height: 30px;
+            border: none;
+            background: none;
+            font-size: 22px;
+            color: #666;
+            display: none;
+        }
+
+        .todos li:hover button {
+            display: block;
+        }
+
+        .todos li button:hover {
+            color: red;
+            cursor: pointer;
+        }
+
+        input {
+            outline: none;
+        }
+
+
+        li.checked label {
+            color: #ddd;
+            text-decoration: line-through;
+        }
+
+        li.checked time {
+            color: #ddd;
+            text-decoration: line-through;
+        }
+
+        li.notodos {
+            color: #ddd;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/javascript" src="./lib/react.development.js"></script>
+    <script type="text/javascript" src="./lib/react-dom.development.js"></script>
+    <script type="text/javascript" src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class Todos extends React.Component {
+
+            state = {
+                todos: [],   //初始化记事项容器（因为是多条记事项，所以用数组存储）
+            }
+
+            componentDidMount() {
+                console.log('获取数据...')
+                // 获取本地缓存中的数据
+                let todos = localStorage.getItem('todos')
+                if (todos === null) {   // 首次使用，localStorage中无数据，取出来为null
+                    todos = []
+                } else {   // [{"":"", "":""}, {}]这种形式的字符串
+                    todos = JSON.parse(todos)
+                }
+                this.setState({
+                    todos
+                })
+            }
+
+            // 添加事项的处理函数
+            addThingHandle = event => {
+                const thing = event.target.value
+                if (event.key === 'Enter' && thing !== '') {  // 说明用户按下回车键并且有输入内容
+                    // 添加动作
+                    // 1. 拿到用户输入的数据并加以补充,并包装成一个对象
+                    const newThing = {
+                        id: new Date().getTime() + '',   // 用时间戳表示唯一标识id
+                        thing,   // 用户输入的事项
+                        created: new Date().toLocaleString(),  // 创建时间
+                        done: false  // 完成状态，false表示未完成（界面显示未勾选状态）
+                    }
+                    // 2. 将新对象放入state的todos中
+                    let { todos } = this.state
+                    todos.unshift(newThing)
+                    this.setState({ todos })  // 将局部todos设置到state中todos上
+
+                    // console.log(this.state.todos)
+                    // 选中或清空输入框
+                    // event.target.select()   选中文本
+                    event.target.value = ''   // 清空输入框 
+                    // 把数据写入localStorage中
+                    localStorage.setItem('todos', JSON.stringify(todos))
+                }
+            }
+
+            // 删除事项的处理函数
+            deleteThingHandle = index => {
+                let r = window.confirm('确定删除吗?')
+                if(r) {   //确定删除
+                    let { todos } = this.state
+                    todos.splice(index, 1)
+                    this.setState({ todos }) 
+                    // 从localStorage中删除（重新设置新的todos）
+                    localStorage.setItem('todos', JSON.stringify(todos))
+                }
+            }
+
+            // 复选框状态改变的处理函数
+            changeDoneStatus = (event, id) => {
+                // 获取复选框的勾选状态
+                const done =  event.target.checked
+                // console.log(done)
+                console.log(id)
+                let { todos } = this.state
+                todos.forEach(o => {
+                    if(o.id === id) {
+                        o.done = done
+                    }
+                })
+                this.setState({ todos }) 
+                localStorage.setItem('todos', JSON.stringify(todos))
+            }
+
+            render() {
+                console.log('render...')
+                return (
+                    <div>
+                        <h1>我的记事本</h1>
+                        <ul className="todos">
+                            <li>
+                                <input type="text" placeholder="快写下您要我记住的事儿吧" onKeyUp={this.addThingHandle} />
+                            </li>
+                            {
+                                this.state.todos.length === 0 ?
+                                    <li>暂无记录</li>
+                                    :
+                                    this.state.todos.map((e, index) =>
+                                        <li key={e.id} className={e.done?'checked':''}>
+                                            <input type="checkbox" onChange={() => {this.changeDoneStatus(event, e.id)}} checked={e.done}/>
+                                            <label>{index+1}. {e.thing}</label>
+                                            <time>{e.created}</time>
+                                            <button onClick={() => this.deleteThingHandle(index)}>&times;</button>
+                                        </li>)
+                            }
+
+                        </ul>
+                    </div>
+                )
+            }
+        }
+
+
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+        root.render(<Todos />)
+
+    </script>
+
+</body>
+
+</html>

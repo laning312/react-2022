@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class Regist extends React.Component {
+
+
+           
+
+
+            showUsername = e => {
+                console.log(e.target.value)
+            }
+
+            render() {
+                return (
+                    <form action="">
+                        username: <input type="text" onBlur={this.showUsername}/> <br />
+                        password: <input type="password" /> <br />
+                        repeat password: <input type="password" /> <br />
+                        <input type="submit" value="regist" />
+                    </form>
+                )
+            }
+        }
+
+        // 创建React根容器
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        // 渲染元素
+        root.render(<Regist />)
+
+    </script>
+
+</body>
+
+</html>

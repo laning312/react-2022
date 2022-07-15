@@ -1,0 +1,19 @@
+1. 安装  react-router-dom@5
+2. 入口文件中
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+3. 在某组件中进行路由链接的编写(<Link to="">/<NavLink>)和路由的注册(<Switch>, <Route path="" component={}>)
+
+
+
+前端（界面呈现）
+    UI视图
+    调用后台接口 （根据接口要求，带相应的参数， 并接收结果，根据结果做出不同的处理)
+
+后端（接口 - 数据）
+    根据接口文档开发接口
+    （两大类接口
+        - 需要认证的 - 带token的
+        - 不需要认证的  - 不带的token
+    )

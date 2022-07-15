@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        class Person {
+            say() {
+                console.log(this)
+                console.log('.....')
+            }
+        }
+
+        let p1 = new Person()
+        p1.say()
+
+        let fn = p1.say
+        fn()   // this是undefined
+
+
+
+        let obj = {
+            sayHello() {
+                console.log(this)
+                console.log('sayhello....')
+            }
+        }
+
+        obj.sayHello()
+
+        let f = obj.sayHello
+        f()   // this是window
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+        // 定义组件
+        class Weather extends React.Component {
+            // 这样写在类内部顶端的属性，会自动成为类的实例的属性
+            state = {
+                isHot: true
+            }
+
+            changeWeather = () => {
+                // console.log(this)   // 就是weather对象（箭头函数没有自己的this，使用父级的this）
+                let { isHot } = this.state
+                this.setState({
+                    isHot: !isHot
+                })
+            }
+
+            render() {
+                const { isHot: f } = this.state
+                return (
+                    <h3 onClick={this.changeWeather}>今天天气很{f ? '炎热' : '凉爽'}</h3>
+                )
+            }
+        }
+
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        root.render(<Weather />)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,14 @@
+1. axios
+    axios.get()
+    axios.post()
+2. 组件通信
+    父 ->  子    props
+    子 ->  父    父通过props将自己的方法传递给子,子在合适的时机调用父的方法,同时携带数据给父
+
+    兄 弟        发布订阅模式（pubsub-js） 别的类型组件通信也可以使用
+
+                
+    父传子（层级深）： context
+            1） 创建context
+            2)  提供者 <xxx.Provider value="">
+            3） 消费者 <xxx.Consumer>{v => console.log(v)}</...>

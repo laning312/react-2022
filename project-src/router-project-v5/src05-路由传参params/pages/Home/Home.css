@@ -1,0 +1,32 @@
+.home {
+    margin-top: 5px;
+    display: flex;
+    flex-direction: rows;
+}
+.home .left {
+    display: flex;
+    width: 100px;
+    flex-direction: column;
+    background: #ddd;
+    min-height: 500px;
+    margin-right: 2px;
+}
+
+.home .left a {
+    text-decoration: none;
+    color: #333;
+    text-align: center;
+    padding: 10px;
+}
+
+.home .left a.active {
+    color: #fff;
+    background: #bbb;
+}
+
+.home .right {
+    flex: 1;
+    background: #ddd;
+    padding: 10px;
+}
+

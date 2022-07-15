@@ -1,0 +1,32 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+
+.swiper-container {
+    width: 100%;
+}
+
+.swiper-container img {
+    width: 100%;
+}
+
+
+/* SCROLLX */
+
+.scrollx {
+  white-space: nowrap;
+  overflow-x: auto;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollx .item {
+    display: inline-block;
+    width: 150px;
+    margin: 3px;
+    border: 1px solid #ddd;
+    text-align: center;
+}

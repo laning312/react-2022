@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class Person extends React.Component {
+            state = {
+                persons: [
+                    { name: '李白', age: 18 },
+                    { name: '杜甫', age: 19 },
+                    { name: '白居易', age: 20 },
+                ],
+                name: '',
+                age: ''
+            }
+
+            saveName = e => {
+                this.setState({
+                    name: e.target.value
+                })
+            }
+
+            saveAge = e => {
+                this.setState({
+                    age: e.target.value
+                })
+            }
+
+            addPersonHandler= () => {
+                let {persons, name, age} = this.state
+                // persons.push({
+                //     name: this.state.name,
+                //     age: this.state.age
+                // })
+                persons.push({name, age})
+                this.setState({
+                    persons
+                })
+            }
+
+
+            render() {
+                let o = (
+                    <div>
+                        name: <input type="text" onChange={this.saveName} value={this.state.name}/>  
+                        age: <input type="text" onChange={this.saveAge} value={this.state.age}/> 
+                        <button onClick={this.addPersonHandler}>add person</button>
+                        <ul>
+                            {this.state.persons.map((e, index) => <li key={index}>{e.name} - {e.age}</li>)}
+                        </ul>
+                    </div>
+                )
+
+                return o
+            }
+        }
+
+
+        /* 
+            
+            添加前：（更新前）
+                <li key=0>李白-18</li>
+                <li key=1>杜甫-19</li>
+                <li key=2>白居易-20</li>
+            添加后： （更新后）
+                <li key=0>李白-18</li>
+                <li key=1>杜甫-19</li>
+                <li key=2>白居易-20</li>
+                <li key=3>张三-20</li>
+        */
+
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        root.render(<Person />)
+    </script>
+</body>
+
+</html>

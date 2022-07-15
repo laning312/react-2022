@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <!-- 没有包含中form中的button标签，就是一个普通的按钮
+    等价于
+        <input type="button" value="Test" />
+    当点击普通的button时，触发的事件是当前button的click事件
+
+    <button>如果放在form表单中，则变成了提交按钮
+    等价于
+         <input type="submit" value="Test" />
+    当点击submit按钮时，触发的事件是当前表单的submit事件
+-->
+
+    <form action="" id="form1">
+        <input type="text"> <br>
+        <button id="btn1">Test</button>
+    </form>
+
+    <script>
+        // document.getElementById('btn1').onclick = function () {
+        //     // ...
+        // }
+    </script>
+</body>
+
+</html>

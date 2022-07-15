@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <input type="text"> <br>
+    <!-- 没有包含中form中的button标签，就是一个普通的按钮
+    等价于
+        <input type="button" value="Test" />
+    当点击普通的button时，触发的事件是当前button的click事件
+-->
+    <button id="btn1">Test</button>
+
+    <script>
+        document.getElementById('btn1').onclick = function() {
+        // ...
+        }
+    </script>
+</body>
+</html>

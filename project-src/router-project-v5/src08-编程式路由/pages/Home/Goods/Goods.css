@@ -1,0 +1,6 @@
+.goods .list a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    margin: 10px;
+}

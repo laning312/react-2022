@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="root"></div>
+
+    <script src="./lib/react.development.js"></script>
+    <script src="./lib/react-dom.development.js"></script>
+    <script src="./lib/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        class Regist extends React.Component {
+
+            oUsername = React.createRef()  // {current:某dom对象}
+            oPassword = React.createRef()
+
+            handleRegist = e => {
+                e.preventDefault()   // 阻止浏览器默认行为(原生的return false也能实现阻止默认行为，但是这里不行)
+                console.log(e) // 事件对象是react包装之后的事件对象（解决了一些兼容性问题），其他用法基本上原生对象相同
+                let username = this.oUsername.current.value
+                let password = this.oPassword.current.value
+                let user = {
+                    username,
+                    password
+                }
+                console.log(user)
+
+                console.log(e.target)
+            }
+
+            render() {
+                return (
+                    <form action="" onSubmit={this.handleRegist}>
+                        username: <input type="text"  ref={this.oUsername}/> <br />
+                        password: <input type="password" ref={this.oPassword}/> <br />
+                        repeat password: <input type="password" /> <br />
+                        <input type="submit" value="regist" />
+                    </form>
+                )
+            }
+        }
+
+        // 创建React根容器
+        let root = ReactDOM.createRoot(document.getElementById('root'))
+
+        // 渲染元素
+        root.render(<Regist />)
+
+    </script>
+
+</body>
+
+</html>

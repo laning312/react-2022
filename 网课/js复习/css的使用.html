@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container .item .title {
+            color: blue;
+        }
+
+        .container .item p {
+            color: green;
+        }
+        .title {
+            color: red
+        }
+
+        /*
+        css预处理器支持下面的写法(新式的css语言，但是最后都需被转成原生css)
+        sass/scss, less, stylus  
+        .container {
+            .item{
+                .title {
+                    color: red;
+                }
+                p {
+                    color: green;
+                }
+            }
+        } */
+
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item">
+            <h4 class="title">Test</h4>
+            <p>hello</p>
+        </div>
+
+        <p class="title">这也是一个标题</p>
+    </div>
+</body>
+</html>
